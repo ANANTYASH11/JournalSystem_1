@@ -31,42 +31,46 @@ export function JournalForm({ onSubmit, loading }: JournalFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
-        ✨ New Journal Entry
-      </h2>
+    <form onSubmit={handleSubmit} className="glass glass-dark rounded-2xl p-8 space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold text-white mb-2">
+          ✨ New Journal Entry
+        </h2>
+        <p className="text-gray-400">Express yourself and let AI understand your emotions</p>
+      </div>
 
       {/* Ambience Selector */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-600 mb-2">
+      <div>
+        <label className="block text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">
           Which ambience did you experience?
         </label>
         <AmbienceSelector selected={ambience} onChange={setAmbience} />
       </div>
 
       {/* Text Area */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-600 mb-2">
-          How do you feel? What did you experience?
-        </label>
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <label className="block text-sm font-semibold text-gray-300 uppercase tracking-wider">
+            How do you feel?
+          </label>
+          <span className={`text-xs font-medium ${text.length < 10 ? 'text-red-400' : 'text-emerald-400'}`}>
+            {text.length} / 10
+          </span>
+        </div>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="journal-textarea"
+          className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500/50 focus:bg-white/10 transition-all duration-300 resize-none focus:ring-2 focus:ring-emerald-500/20"
           placeholder="I felt calm today after listening to the rain. The forest sounds helped me relax and forget about my worries..."
           disabled={loading}
-          rows={5}
+          rows={6}
         />
-        <div className="flex justify-between text-xs text-gray-400 mt-1">
-          <span>{text.length} characters</span>
-          <span>Min: 10 characters</span>
-        </div>
       </div>
 
       {/* Error Message */}
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
-          {error}
+        <div className="p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-200 text-sm animate-fade-in-up">
+          <p className="font-semibold mb-1">⚠️ {error.split('.')[0]}</p>
         </div>
       )}
 
@@ -74,7 +78,11 @@ export function JournalForm({ onSubmit, loading }: JournalFormProps) {
       <button
         type="submit"
         disabled={loading || text.trim().length < 10}
-        className="btn-primary w-full flex items-center justify-center gap-2"
+        className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+          loading || text.trim().length < 10
+            ? 'bg-gray-500/50 text-gray-300 cursor-not-allowed'
+            : 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white hover:shadow-lg hover:shadow-emerald-500/50 hover:scale-105'
+        }`}
       >
         {loading ? (
           <>

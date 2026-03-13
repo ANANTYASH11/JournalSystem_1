@@ -1,4 +1,4 @@
-import { BarChart3, TrendingUp, Hash, Activity } from 'lucide-react';
+import { TrendingUp, Hash, Activity } from 'lucide-react';
 import { UserInsights } from '../types';
 
 interface InsightsPanelProps {
@@ -22,12 +22,12 @@ const emotionEmojis: Record<string, string> = {
 export function InsightsPanel({ insights, loading }: InsightsPanelProps) {
   if (loading) {
     return (
-      <div className="card animate-pulse">
-        <div className="h-6 bg-gray-200 rounded w-1/3 mb-4"></div>
-        <div className="space-y-3">
-          <div className="h-4 bg-gray-200 rounded w-full"></div>
-          <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-          <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+      <div className="glass glass-dark rounded-2xl p-8 animate-pulse">
+        <div className="h-8 bg-white/10 rounded w-1/3 mb-8"></div>
+        <div className="space-y-4">
+          <div className="h-6 bg-white/10 rounded w-full"></div>
+          <div className="h-6 bg-white/10 rounded w-2/3"></div>
+          <div className="h-6 bg-white/10 rounded w-1/2"></div>
         </div>
       </div>
     );
@@ -35,10 +35,10 @@ export function InsightsPanel({ insights, loading }: InsightsPanelProps) {
 
   if (insights.totalEntries === 0) {
     return (
-      <div className="card text-center py-8">
-        <Activity size={48} className="mx-auto text-gray-300 mb-4" />
-        <h3 className="text-lg font-medium text-gray-600 mb-2">No insights yet</h3>
-        <p className="text-sm text-gray-400">
+      <div className="glass glass-dark rounded-2xl p-12 text-center">
+        <Activity size={48} className="mx-auto text-white/20 mb-4" />
+        <h3 className="text-2xl font-semibold text-white mb-3">No insights yet</h3>
+        <p className="text-gray-400 mb-6">
           Start writing journal entries to see your mental wellness insights.
         </p>
       </div>
@@ -50,30 +50,25 @@ export function InsightsPanel({ insights, loading }: InsightsPanelProps) {
     : '😊';
 
   return (
-    <div className="card">
-      <div className="flex items-center gap-2 mb-6">
-        <BarChart3 size={24} className="text-purple-500" />
-        <h2 className="text-xl font-semibold text-gray-800">Your Insights</h2>
-      </div>
-
+    <div className="space-y-6 animate-fade-in-up">
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
-          <p className="text-sm text-blue-600 mb-1">Total Entries</p>
-          <p className="text-3xl font-bold text-blue-700">{insights.totalEntries}</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="glass glass-dark rounded-2xl p-6 border-l-4 border-emerald-500">
+          <p className="text-gray-400 text-sm mb-2 uppercase tracking-wider">Total Entries</p>
+          <p className="text-4xl font-bold text-white">{insights.totalEntries}</p>
         </div>
         
-        <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
-          <p className="text-sm text-purple-600 mb-1">Top Emotion</p>
-          <p className="text-2xl font-bold text-purple-700 capitalize flex items-center gap-2">
+        <div className="glass glass-dark rounded-2xl p-6 border-l-4 border-cyan-500">
+          <p className="text-gray-400 text-sm mb-2 uppercase tracking-wider">Top Emotion</p>
+          <p className="text-3xl font-bold text-white capitalize flex items-center gap-2">
             <span>{emoji}</span>
             <span>{insights.topEmotion || 'N/A'}</span>
           </p>
         </div>
 
-        <div className="p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl col-span-2">
-          <p className="text-sm text-green-600 mb-1">Favorite Ambience</p>
-          <p className="text-xl font-bold text-green-700 capitalize">
+        <div className="glass glass-dark rounded-2xl p-6 border-l-4 border-purple-500">
+          <p className="text-gray-400 text-sm mb-2 uppercase tracking-wider">Favorite Ambience</p>
+          <p className="text-xl font-bold text-white capitalize">
             {insights.mostUsedAmbience || 'No preference yet'}
           </p>
         </div>
@@ -81,27 +76,29 @@ export function InsightsPanel({ insights, loading }: InsightsPanelProps) {
 
       {/* Emotion Distribution */}
       {insights.emotionDistribution && Object.keys(insights.emotionDistribution).length > 0 && (
-        <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center gap-2">
-            <TrendingUp size={16} />
+        <div className="glass glass-dark rounded-2xl p-6">
+          <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-3">
+            <TrendingUp size={20} className="text-emerald-400" />
             Emotion Distribution
           </h3>
-          <div className="space-y-2">
+          <div className="space-y-4">
             {Object.entries(insights.emotionDistribution)
               .sort((a, b) => b[1] - a[1])
               .slice(0, 5)
               .map(([emotion, count]) => {
                 const percentage = (count / insights.totalEntries) * 100;
                 return (
-                  <div key={emotion} className="flex items-center gap-3">
-                    <span className="text-sm capitalize w-20 text-gray-600">{emotion}</span>
-                    <div className="flex-1 bg-gray-100 rounded-full h-2 overflow-hidden">
+                  <div key={emotion}>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm capitalize font-medium text-gray-300">{emotion}</span>
+                      <span className="text-sm text-emerald-400 font-semibold">{percentage.toFixed(1)}%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-purple-400 to-purple-600 rounded-full transition-all duration-500"
+                        className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full transition-all duration-500"
                         style={{ width: `${percentage}%` }}
                       />
                     </div>
-                    <span className="text-sm text-gray-500 w-8">{count}</span>
                   </div>
                 );
               })}
@@ -111,18 +108,18 @@ export function InsightsPanel({ insights, loading }: InsightsPanelProps) {
 
       {/* Recent Keywords */}
       {insights.recentKeywords.length > 0 && (
-        <div>
-          <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center gap-2">
-            <Hash size={16} />
+        <div className="glass glass-dark rounded-2xl p-6">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-3">
+            <Hash size={20} className="text-cyan-400" />
             Recent Keywords
           </h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {insights.recentKeywords.map((keyword, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                className="px-4 py-2 bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white rounded-full text-sm font-medium transition-all duration-300 cursor-default"
               >
-                {keyword}
+                #{keyword}
               </span>
             ))}
           </div>
