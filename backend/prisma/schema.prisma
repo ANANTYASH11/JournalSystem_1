@@ -1,0 +1,77 @@
+// Prisma Schema for Journal System
+// Using SQLite for easy local development (can scale to PostgreSQL)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User model for multi-user support
+model User {
+  id        String   @id @default(uuid())
+  email     String?  @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  journalEntries JournalEntry[]
+  insights       UserInsight?
+}
+
+// Main Journal Entry model
+model JournalEntry {
+  id        String   @id @default(uuid())
+  userId    String
+  ambience  String   // forest, ocean, mountain
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user     User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analysis EmotionAnalysis?
+
+  @@index([userId])
+  @@index([createdAt])
+  @@index([ambience])
+}
+
+// Cached emotion analysis results
+model EmotionAnalysis {
+  id             String   @id @default(uuid())
+  journalEntryId String   @unique
+  emotion        String
+  keywords       String   // JSON array stored as string
+  summary        String
+  confidence     Float?   // Confidence score from LLM
+  textHash       String   // Hash of original text for cache lookup
+  createdAt      DateTime @default(now())
+
+  // Relations
+  journalEntry JournalEntry @relation(fields: [journalEntryId], references: [id], onDelete: Cascade)
+
+  @@index([textHash])
+}
+
+// Aggregated user insights (cached for performance)
+model UserInsight {
+  id               String   @id @default(uuid())
+  userId           String   @unique
+  totalEntries     Int      @default(0)
+  topEmotion       String?
+  emotionCounts    String?  // JSON object stored as string
+  mostUsedAmbience String?
+  ambienceCounts   String?  // JSON object stored as string
+  recentKeywords   String?  // JSON array stored as string
+  lastUpdated      DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
