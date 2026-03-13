@@ -11,19 +11,19 @@ const ambiences: { type: AmbienceType; icon: typeof Trees; label: string; gradie
     type: 'forest',
     icon: Trees,
     label: 'Forest',
-    gradient: 'from-emerald-500 to-teal-500',
+    gradient: 'from-green-600 to-green-700',
   },
   {
     type: 'ocean',
     icon: Waves,
     label: 'Ocean',
-    gradient: 'from-cyan-500 to-blue-500',
+    gradient: 'from-blue-600 to-blue-700',
   },
   {
     type: 'mountain',
     icon: Mountain,
     label: 'Mountain',
-    gradient: 'from-purple-500 to-pink-500',
+    gradient: 'from-purple-600 to-purple-700',
   },
 ];
 
@@ -38,8 +38,8 @@ export function AmbienceSelector({ selected, onChange }: AmbienceSelectorProps) 
             flex flex-col items-center gap-2 px-4 py-4 rounded-xl font-semibold transition-all duration-300
             ${
               selected === type
-                ? `bg-gradient-to-r ${gradient} text-white shadow-lg shadow-emerald-500/50 scale-105 border border-white/50`
-                : 'bg-white/5 border border-white/20 text-gray-300 hover:border-white/40 hover:bg-white/10 hover:text-white'
+                ? `bg-gradient-to-r ${gradient} text-white shadow-lg shadow-amber-600/30 scale-105 border border-white/50`
+                : 'bg-white/40 border border-amber-200/50 text-amber-900 hover:border-amber-300 hover:bg-white/60 hover:text-amber-950'
             }
           `}
         >

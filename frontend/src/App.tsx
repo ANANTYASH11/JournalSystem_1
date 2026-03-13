@@ -92,19 +92,19 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/10 backdrop-blur-md bg-gradient-to-r from-slate-900/90 via-slate-800/90 to-slate-900/90">
+      <header className="sticky top-0 z-50 border-b border-amber-200 backdrop-blur-md bg-gradient-to-r from-amber-50/90 via-orange-50/90 to-amber-100/90 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="flex items-center gap-3 animate-fade-in-up">
-              <div className="p-2 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-xl shadow-lg shadow-emerald-500/50">
+              <div className="p-2 bg-gradient-to-br from-amber-600 to-yellow-600 rounded-xl shadow-lg shadow-amber-600/30">
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-white">ArvyaX</h1>
-                <p className="text-emerald-400 text-xs font-semibold tracking-wider">Journal System</p>
+                <h1 className="text-2xl font-bold text-amber-900">📖 Journal</h1>
+                <p className="text-amber-700 text-xs font-semibold tracking-wider">Nature & Wellness</p>
               </div>
             </div>
 
@@ -123,8 +123,8 @@ function App() {
                   }}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                     activeTab === id
-                      ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg shadow-emerald-500/50'
-                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                      ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-lg shadow-amber-600/30'
+                      : 'text-amber-900 hover:bg-white/60 hover:text-amber-950'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -140,7 +140,7 @@ function App() {
                   fetchEntries();
                   fetchInsights();
                 }}
-                className="p-2 hover:bg-white/10 rounded-lg transition-all duration-300 text-gray-300 hover:text-white"
+                className="p-2 hover:bg-white/40 rounded-lg transition-all duration-300 text-amber-900 hover:text-amber-950"
                 title="Refresh"
               >
                 <RefreshCw className="w-5 h-5" />
@@ -149,7 +149,7 @@ function App() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-all duration-300 text-gray-300 hover:text-white"
+                className="md:hidden p-2 hover:bg-white/40 rounded-lg transition-all duration-300 text-amber-900 hover:text-amber-950"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -172,8 +172,8 @@ function App() {
                   }}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 w-full ${
                     activeTab === id
-                      ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white'
-                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                      ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white'
+                      : 'text-amber-900 hover:bg-white/40 hover:text-amber-950'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -191,11 +191,11 @@ function App() {
         {activeTab === 'write' && (
           <div className="space-y-8 animate-fade-in-up">
             <div className="text-center space-y-4">
-              <h2 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
-                How are you <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">feeling</span>?
+              <h2 className="text-4xl sm:text-5xl font-bold text-amber-900 leading-tight">
+                Share your <span className="bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent">nature journey</span>
               </h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Share your thoughts after your immersive nature session. Our AI will analyze your emotions and help you understand your mental state.
+              <p className="text-amber-800 text-lg max-w-2xl mx-auto">
+                Write about your wellness experience in nature. Let our AI understand your emotions and help you track your mental wellness journey.
               </p>
             </div>
 
@@ -210,14 +210,14 @@ function App() {
           <div className="space-y-6 animate-fade-in-up">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Your Journal</h2>
-                <p className="text-gray-400">
-                  {entries.length} {entries.length === 1 ? 'entry' : 'entries'} recorded
+                <h2 className="text-3xl sm:text-4xl font-bold text-amber-900 mb-2">📚 My Journal</h2>
+                <p className="text-amber-800">
+                  {entries.length} {entries.length === 1 ? 'memory' : 'memories'} recorded
                 </p>
               </div>
               <button
                 onClick={() => setActiveTab('write')}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-600 to-yellow-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-amber-600/30 transition-all duration-300 hover:scale-105"
               >
                 <Sparkles className="w-4 h-4" />
                 New Entry
@@ -227,14 +227,14 @@ function App() {
 
             {entries.length === 0 ? (
               <div className="text-center py-16 glass rounded-2xl">
-                <Brain className="w-20 h-20 text-white/20 mx-auto mb-6" />
-                <h3 className="text-2xl font-semibold text-white mb-3">No entries yet</h3>
-                <p className="text-gray-400 mb-8">
-                  Start your wellness journey by writing your first journal entry
+                <Brain className="w-20 h-20 text-amber-300 mx-auto mb-6" />
+                <h3 className="text-2xl font-semibold text-amber-900 mb-3">Start your journal</h3>
+                <p className="text-amber-800 mb-8">
+                  Begin your wellness journey by writing your first journal entry about your nature experience
                 </p>
                 <button
                   onClick={() => setActiveTab('write')}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-emerald-500/50 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-600 to-yellow-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-amber-600/30 transition-all duration-300"
                 >
                   Write Your First Entry
                 </button>
@@ -255,15 +255,15 @@ function App() {
         {activeTab === 'insights' && (
           <div className="space-y-6 animate-fade-in-up">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Your Insights</h2>
-              <p className="text-gray-400">Mental wellness trends and patterns</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-amber-900 mb-2">📊 Your Wellness Insights</h2>
+              <p className="text-amber-800">Track your emotional patterns and growth</p>
             </div>
             {insights ? (
               <InsightsPanel insights={insights} />
             ) : (
               <div className="glass rounded-2xl p-8 text-center">
                 <div className="animate-pulse-glow inline-block">
-                  <BarChart3 className="w-12 h-12 text-white/20" />
+                  <BarChart3 className="w-12 h-12 text-amber-300" />
                 </div>
               </div>
             )}
@@ -272,13 +272,13 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 backdrop-blur-md py-8 mt-20">
+      <footer className="border-t border-amber-200 backdrop-blur-md py-8 mt-20 bg-white/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-gray-400 text-sm">
-            ✨ ArvyaX Journal System • Powered by AI Emotion Analysis
+          <p className="text-amber-900 text-sm font-medium">
+            📖 Nature Journal • Powered by AI Emotion Analysis
           </p>
-          <p className="text-gray-500 text-xs mt-2">
-            Your wellness journey, understood by artificial intelligence
+          <p className="text-amber-800 text-xs mt-2">
+            Track your wellness journey through nature experiences
           </p>
         </div>
       </footer>
