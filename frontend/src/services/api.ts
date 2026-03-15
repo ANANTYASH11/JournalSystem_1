@@ -9,7 +9,7 @@ import {
 } from '../types';
 
 // API base URL
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://journal-system-backend.onrender.com/api';
 
 // Create axios instance
 const api = axios.create({
